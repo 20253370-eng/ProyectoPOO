@@ -34,37 +34,40 @@ public class GestionEmpleados
     }
     
     
-     public void modificarEmpleado(int dni) {
+public boolean modificarEmpleado(int dni, String nombres, String apellidos, String usuario, String password, String rol){
 
-        for(int i = 0; i < cantEmpleados; i++){
+    for(int i = 0; i < cantEmpleados; i++){
 
-            if(listaEmpleados[i].getDni() == dni){
+        if(listaEmpleados[i].getDni() == dni){
 
-                System.out.println("Empleado encontrado para modificar.");
+            listaEmpleados[i].setNombres(nombres);
+            listaEmpleados[i].setApellidos(apellidos);
+            listaEmpleados[i].setUsuario(usuario);
+            listaEmpleados[i].setPassword(password);
+            listaEmpleados[i].setRol(rol);
 
-                return;
-            }
+            return true;
         }
-
-        System.out.println("Empleado no encontrado.");
     }
-     
-     public void eliminarEmpleado(int dni) {
 
-        for(int i = 0; i < cantEmpleados; i++){
+    return false;
+}
+public boolean eliminarEmpleado(int dni) {
 
-            if(listaEmpleados[i].getDni() == dni){
+    for(int i = 0; i < cantEmpleados; i++){
 
-                listaEmpleados[i] = listaEmpleados[cantEmpleados-1];
-                cantEmpleados--;
+        if(listaEmpleados[i].getDni() == dni){
 
-                System.out.println("Empleado eliminado.");
-                return;
-            }
+            listaEmpleados[i] = listaEmpleados[cantEmpleados - 1];
+            listaEmpleados[cantEmpleados - 1] = null;
+            cantEmpleados--;
+
+            return true;
         }
-
-        System.out.println("Empleado no encontrado.");
     }
+
+    return false;
+}
 
 
 
