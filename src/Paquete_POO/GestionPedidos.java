@@ -11,6 +11,7 @@ package Paquete_POO;
 public class GestionPedidos 
 {
     private Pedido[] listaPedidos;
+    private int ultimoNumero;
     private int cantPedidos;
 
     private float recargos;
@@ -22,24 +23,30 @@ public class GestionPedidos
         listaPedidos = new Pedido[100];
         cantPedidos = 0;
         recargos = 0;
+        ultimoNumero = 0;
     }
 
+    public int generarNumeroPedido(){
 
+        ultimoNumero++;
 
-    public void crearPedido(Pedido ped) {
-
-        if(cantPedidos < listaPedidos.length){
-
-            listaPedidos[cantPedidos] = ped;
-            cantPedidos++;
-
-            System.out.println("Pedido creado correctamente.");
-
-        }else{
-
-            System.out.println("No hay espacio para pedidos.");
-        }
+        return ultimoNumero;
     }
+
+public boolean crearPedido(Pedido ped){
+
+    if(cantPedidos < listaPedidos.length){
+
+        listaPedidos[cantPedidos] = ped;
+        cantPedidos++;
+
+        return true;
+
+    }else{
+
+        return false;
+    }
+}
 
 
 
@@ -121,26 +128,75 @@ public class GestionPedidos
 
 
 
-    public Factura generarComprobante(int numero){
+public Factura generarComprobante(int numero){
 
-        Pedido ped = buscarPedido(numero);
+    Pedido ped = buscarPedido(numero);
+
+    if(ped != null){
+
+        float subtotal = 0;
 
 
-        if(ped != null){
+        if(ped.getDetalles() != null){
 
-            Factura factura = new Factura();
+            for(Detalle_Pedido d : ped.getDetalles()){
 
-            factura.setSubtotal(0);
+                if(d != null){
 
-            factura.calcularIGV();
 
-            ped.setFactura(factura);
+                    if(d.getProducto() != null){
 
-            return factura;
+                        subtotal += d.getProducto().getPrecioBase()
+                                * d.getCantidad();
+
+                    }
+
+
+                    if(d.getCombo() != null){
+
+                        subtotal += d.getCombo().getPrecioPromocional()
+                                * d.getCantidad();
+
+                    }
+
+                }
+
+            }
+
         }
 
 
-        return null;
+        subtotal += recargos;
+
+
+        Factura factura = new Factura();
+
+        factura.setNumero(numero);
+        factura.setSubtotal(subtotal);
+
+        factura.calcularIGV();
+
+
+        ped.setFactura(factura);
+
+
+        return factura;
+
     }
+
+
+    return null;
+}
+
+public Pedido[] getListaPedidos(){
+
+    return listaPedidos;
+}
+
+
+public int getCantPedidos(){
+
+    return cantPedidos;
+}
 
 }

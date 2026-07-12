@@ -99,4 +99,32 @@ public boolean eliminarEmpleado(int dni) {
         return null;
     }
     
+    public Empleado[] getListaEmpleados(){
+
+    return listaEmpleados;
+}
+
+
+public int getCantEmpleados(){
+
+    return cantEmpleados;
+}
+
+public Repartidor buscarRepartidorDisponible(){
+
+    for(int i = 0; i < cantEmpleados; i++){
+
+        if(listaEmpleados[i] instanceof Repartidor){
+
+            Repartidor rep = (Repartidor) listaEmpleados[i];
+
+            if(rep.isDisponible()){
+
+                return rep;
+            }
+        }
+    }
+
+    return null;
+}
 }

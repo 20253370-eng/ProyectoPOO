@@ -45,39 +45,41 @@ public class GestionMenu
 
 
 
-    public void modificarProducto(int codigo) {
+public boolean modificarProducto(int codigo, String nombre, String categoria, float precioBase){
 
-        for(int i = 0; i < cantProductos; i++){
+    for(int i = 0; i < cantProductos; i++){
 
-            if(listaProductos[i].getCodigo() == codigo){
+        if(listaProductos[i].getCodigo() == codigo){
 
-                System.out.println("Producto encontrado para modificar.");
+            listaProductos[i].setNombre(nombre);
+            listaProductos[i].setCategoria(categoria);
+            listaProductos[i].setPrecioBase(precioBase);
 
-                return;
-            }
+            return true;
         }
-
-        System.out.println("Producto no encontrado.");
     }
 
+    return false;
+}
 
 
-    public void eliminarProducto(int codigo) {
 
-        for(int i = 0; i < cantProductos; i++){
+public boolean eliminarProducto(int codigo){
 
-            if(listaProductos[i].getCodigo() == codigo){
+    for(int i = 0; i < cantProductos; i++){
 
-                listaProductos[i] = listaProductos[cantProductos-1];
-                cantProductos--;
+        if(listaProductos   [i].getCodigo() == codigo){
 
-                System.out.println("Producto eliminado.");
-                return;
-            }
+            listaProductos[i] = listaProductos[cantProductos - 1];
+            listaProductos[cantProductos - 1] = null;
+            cantProductos--;
+
+            return true;
         }
-
-        System.out.println("Producto no encontrado.");
     }
+
+    return false;
+}
 
 
 
@@ -115,40 +117,42 @@ public class GestionMenu
 
 
 
-    public void modificarCombo(int codigo) {
+public boolean modificarCombo(int codigo, String nombre, Producto[] productos, float precioPromocional){
 
-        for(int i = 0; i < cantCombos; i++){
+    for(int i = 0; i < cantCombos; i++){
 
-            if(listaCombos[i].getCodigo() == codigo){
+        if(listaCombos[i].getCodigo() == codigo){
 
-                System.out.println("Combo encontrado para modificar.");
+            listaCombos[i].setNombre(nombre);
+            listaCombos[i].setProductos(productos);
+            listaCombos[i].setPrecioPromocional(precioPromocional);
 
-                return;
-            }
+            return true;
         }
-
-        System.out.println("Combo no encontrado.");
     }
 
+    return false;
+}
 
 
 
-    public void eliminarCombo(int codigo) {
 
-        for(int i = 0; i < cantCombos; i++){
+public boolean eliminarCombo(int codigo){
 
-            if(listaCombos[i].getCodigo() == codigo){
+    for(int i = 0; i < cantCombos; i++){
 
-                listaCombos[i] = listaCombos[cantCombos-1];
-                cantCombos--;
+        if(listaCombos[i].getCodigo() == codigo){
 
-                System.out.println("Combo eliminado.");
-                return;
-            }
+            listaCombos[i] = listaCombos[cantCombos - 1];
+            listaCombos[cantCombos - 1] = null;
+            cantCombos--;
+
+            return true;
         }
-
-        System.out.println("Combo no encontrado.");
     }
+
+    return false;
+}
 
 
 
@@ -165,5 +169,29 @@ public class GestionMenu
 
         return null;
     }
+    
+public Producto[] getListaProductos(){
+
+    return listaProductos;
+}
+
+
+public int getCantProductos(){
+
+    return cantProductos;
+}
+
+
+
+public Combo[] getListaCombos(){
+
+    return listaCombos;
+}
+
+
+public int getCantCombos(){
+
+    return cantCombos;
+}
 
 }

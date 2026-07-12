@@ -15,7 +15,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-         gestionEmpleados = new GestionEmpleados();
+        gestionEmpleados = Sistema.gestionEmpleados;
 
     Administrador admin = new Administrador(
             "admin",

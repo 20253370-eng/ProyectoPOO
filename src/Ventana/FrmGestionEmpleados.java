@@ -5,6 +5,7 @@
 package Ventana;
 import Paquete_POO.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author crisv
@@ -18,7 +19,7 @@ private DefaultTableModel modeloTabla;
 public FrmGestionEmpleados() {
     initComponents();
 
-    gestionEmpleados = new GestionEmpleados();
+    gestionEmpleados = Sistema.gestionEmpleados;
     
     modeloTabla = new DefaultTableModel();
 
@@ -29,6 +30,26 @@ public FrmGestionEmpleados() {
     modeloTabla.addColumn("Rol");
 
     tablaEmpleados.setModel(modeloTabla);
+    cargarEmpleados();
+    
+}
+
+private void cargarEmpleados(){
+
+    modeloTabla.setRowCount(0);
+
+    for(int i = 0; i < gestionEmpleados.getCantEmpleados(); i++){
+
+        Empleado emp = gestionEmpleados.getListaEmpleados()[i];
+
+        modeloTabla.addRow(new Object[]{
+            emp.getDni(),
+            emp.getNombres(),
+            emp.getApellidos(),
+            emp.getUsuario(),
+            emp.getRol()
+        });
+    }
 }
 
     /**
@@ -46,7 +67,6 @@ public FrmGestionEmpleados() {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtRol = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
         txtNombres = new javax.swing.JTextField();
@@ -59,6 +79,8 @@ public FrmGestionEmpleados() {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        cmbRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion de empleados");
@@ -74,12 +96,6 @@ public FrmGestionEmpleados() {
         jLabel5.setText("Password");
 
         jLabel6.setText("Rol");
-
-        txtRol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRolActionPerformed(evt);
-            }
-        });
 
         txtDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +180,15 @@ public FrmGestionEmpleados() {
             }
         });
 
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
+        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero", "Repartidor" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,6 +209,8 @@ public FrmGestionEmpleados() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,12 +218,13 @@ public FrmGestionEmpleados() {
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar)))
+                                .addComponent(btnEliminar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cmbRol, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29))))
@@ -230,7 +258,7 @@ public FrmGestionEmpleados() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnModificar)
@@ -239,16 +267,13 @@ public FrmGestionEmpleados() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscar)
+                    .addComponent(btnVolver))
                 .addContainerGap(281, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRolActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRolActionPerformed
 
     private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
         // TODO add your handling code here:
@@ -280,7 +305,7 @@ boolean modificado = gestionEmpleados.modificarEmpleado(
         txtApellidos.getText(),
         txtUsuario.getText(),
         txtPassword.getText(),
-        txtRol.getText()
+        cmbRol.getSelectedItem().toString()
 );
 
 if(modificado){
@@ -291,7 +316,7 @@ if(modificado){
     modeloTabla.setValueAt(txtNombres.getText(), fila, 1);
     modeloTabla.setValueAt(txtApellidos.getText(), fila, 2);
     modeloTabla.setValueAt(txtUsuario.getText(), fila, 3);
-    modeloTabla.setValueAt(txtRol.getText(), fila, 4);
+    modeloTabla.setValueAt(cmbRol.getSelectedItem().toString(), fila, 4);
 
 
     javax.swing.JOptionPane.showMessageDialog(this,
@@ -344,18 +369,53 @@ if(fila >= 0){
 String apellidos = txtApellidos.getText();
 String usuario = txtUsuario.getText();
 String password = txtPassword.getText();
-String rol = txtRol.getText();
+String rol = cmbRol.getSelectedItem().toString();
 
 int dni = Integer.parseInt(txtDni.getText());
 
-Empleado emp = new Empleado(
-        usuario,
-        password,
-        rol,
-        nombres,
-        apellidos,
-        dni
-);
+Empleado emp;
+
+if(rol.equalsIgnoreCase("Administrador")){
+
+    emp = new Administrador(
+            usuario,
+            password,
+            rol,
+            nombres,
+            apellidos,
+            dni
+    );
+
+}else if(rol.equalsIgnoreCase("Cajero")){
+
+    emp = new Cajero(
+            usuario,
+            password,
+            rol,
+            nombres,
+            apellidos,
+            dni
+    );
+
+}else if(rol.equalsIgnoreCase("Repartidor")){
+
+    emp = new Repartidor(
+            usuario,
+            password,
+            rol,
+            nombres,
+            apellidos,
+            dni,
+            true
+    );
+
+}else{
+
+    JOptionPane.showMessageDialog(this,
+            "Rol inválido");
+
+    return;
+}
 
 gestionEmpleados.registrarEmpleado(emp);
 
@@ -380,7 +440,7 @@ txtDni.setText(tablaEmpleados.getValueAt(fila, 0).toString());
 txtNombres.setText(tablaEmpleados.getValueAt(fila, 1).toString());
 txtApellidos.setText(tablaEmpleados.getValueAt(fila, 2).toString());
 txtUsuario.setText(tablaEmpleados.getValueAt(fila, 3).toString());
-txtRol.setText(tablaEmpleados.getValueAt(fila, 4).toString());
+cmbRol.setSelectedItem(tablaEmpleados.getValueAt(fila, 4).toString());
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -395,14 +455,19 @@ if(emp != null){
     txtApellidos.setText(emp.getApellidos());
     txtUsuario.setText(emp.getUsuario());
     txtPassword.setText(emp.getPassword());
-    txtRol.setText(emp.getRol());
+    cmbRol.setSelectedItem(emp.getRol());
 
 }else{
 
     javax.swing.JOptionPane.showMessageDialog(this,
             "Empleado no encontrado");
-}
+}   
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,6 +510,8 @@ if(emp != null){
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -457,7 +524,6 @@ if(emp != null){
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtRol;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

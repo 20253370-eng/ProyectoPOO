@@ -8,28 +8,29 @@ package Paquete_POO;
  *
  * @author crisv
  */
-public class Pedido 
-{
-     private int numero;
+public class Pedido {
+
+    private int numero;
     private String tipoEntrega;
     private String estado;
+    private Cajero cajero;
 
     private Cliente cliente;
     private Repartidor repartidor;
 
-    private Producto[] productos;
-    private Combo[] combos;
+    private Detalle_Pedido[] detalles;
 
     private Factura factura;
-    
-    public Pedido() {
-    }
 
+
+    public Pedido() {
+
+    }
 
 
     public Pedido(int numero, String tipoEntrega, String estado,
                   Cliente cliente, Repartidor repartidor,
-                  Producto[] productos, Combo[] combos,
+                  Detalle_Pedido[] detalles,
                   Factura factura) {
 
         this.numero = numero;
@@ -37,12 +38,21 @@ public class Pedido
         this.estado = estado;
         this.cliente = cliente;
         this.repartidor = repartidor;
-        this.productos = productos;
-        this.combos = combos;
+        this.detalles = detalles;
         this.factura = factura;
+
     }
 
+    public Cajero getCajero(){
 
+    return cajero;
+}
+
+
+public void setCajero(Cajero cajero){
+
+    this.cajero = cajero;
+}
 
     public int getNumero() {
         return numero;
@@ -99,24 +109,13 @@ public class Pedido
 
 
 
-    public Producto[] getProductos() {
-        return productos;
+    public Detalle_Pedido[] getDetalles() {
+        return detalles;
     }
 
 
-    public void setProductos(Producto[] productos) {
-        this.productos = productos;
-    }
-
-
-
-    public Combo[] getCombos() {
-        return combos;
-    }
-
-
-    public void setCombos(Combo[] combos) {
-        this.combos = combos;
+    public void setDetalles(Detalle_Pedido[] detalles) {
+        this.detalles = detalles;
     }
 
 

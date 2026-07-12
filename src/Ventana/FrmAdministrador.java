@@ -46,10 +46,25 @@ public class FrmAdministrador extends javax.swing.JFrame {
         });
 
         btnMenu.setText("Gestionar Menú");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
         btnReportes.setText("Generar Reporte");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
 
         btnCerrar.setText("Cerrar Sesion");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,6 +107,30 @@ public class FrmAdministrador extends javax.swing.JFrame {
         FrmGestionEmpleados ventana = new FrmGestionEmpleados();
     ventana.setVisible(true);
     }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        FrmGestionMenu ventana = new FrmGestionMenu();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        // TODO add your handling code here:
+            FrmLogin login = new FrmLogin();
+    login.setVisible(true);
+
+    this.dispose();
+        
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+        FrmReportes ventana = new FrmReportes();
+
+ventana.setVisible(true);
+
+this.dispose();
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
      * @param args the command line arguments

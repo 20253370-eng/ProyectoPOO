@@ -14,6 +14,7 @@ public class Combo
     private String nombre;
     private Producto[] productos;
     private float precioPromocional;
+
     
     public Combo(){
     }

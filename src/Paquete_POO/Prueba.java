@@ -133,28 +133,37 @@ public class Prueba {
         // PEDIDO
         // ==========================
 
-
-        Producto[] productosPedido = {
-            hamburguesa
-        };
-
-
-        Combo[] combosPedido = {
-            combo
-        };
+Detalle_Pedido detalle1 = new Detalle_Pedido(
+        hamburguesa,
+        null,
+        2
+);
 
 
+Detalle_Pedido detalle2 = new Detalle_Pedido(
+        null,
+        combo,
+        1
+);
 
-        Pedido pedido = new Pedido(
-                1,
-                "Delivery",
-                "En Cocina",
-                cliente,
-                null,
-                productosPedido,
-                combosPedido,
-                null
-        );
+
+
+Detalle_Pedido[] detallesPedido = {
+    detalle1,
+    detalle2
+};
+
+
+
+Pedido pedido = new Pedido(
+        1,
+        "Delivery",
+        "En Cocina",
+        cliente,
+        null,
+        detallesPedido,
+        null
+);
 
 
 
@@ -191,6 +200,9 @@ public class Prueba {
 
 
         System.out.println("Factura generada.");
+        System.out.println("Subtotal: " + factura.getSubtotal());
+        System.out.println("IGV: " + factura.getIgv());
+
 
         System.out.println("Total: "
                 + factura.getTotal());
