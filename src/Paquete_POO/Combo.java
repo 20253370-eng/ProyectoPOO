@@ -6,9 +6,9 @@ package Paquete_POO;
 
 /**
  *
- * @author crisv
+ * @author Axel-William
  */
-public class Combo 
+public class Combo
 {
     private int codigo;
     private String nombre;
