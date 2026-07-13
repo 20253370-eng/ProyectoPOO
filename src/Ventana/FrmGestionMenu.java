@@ -6,7 +6,7 @@ package Ventana;
 
 /**
  *
- * @author crisv
+ * @author Axel-William
  */
 public class FrmGestionMenu extends javax.swing.JFrame {
 
