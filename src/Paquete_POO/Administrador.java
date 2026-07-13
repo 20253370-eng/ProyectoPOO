@@ -6,7 +6,7 @@ package Paquete_POO;
 
 /**
  *
- * @author crisv
+ * @author chung
  */
 public class Administrador extends Empleado implements Reporte
 {
