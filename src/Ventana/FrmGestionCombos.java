@@ -6,7 +6,7 @@ package Ventana;
 import Paquete_POO.*;
 /**
  *
- * @author crisv
+ * @author Axel-William
  */
 public class FrmGestionCombos extends javax.swing.JFrame {
 private GestionMenu gestionMenu;
