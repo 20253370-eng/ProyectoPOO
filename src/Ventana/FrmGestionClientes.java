@@ -6,7 +6,7 @@ package Ventana;
 import Paquete_POO.*;
 /**
  *
- * @author crisv
+ * @author Axel-William
  */
 public class FrmGestionClientes extends javax.swing.JFrame {
 private GestionClientes gestionClientes;
