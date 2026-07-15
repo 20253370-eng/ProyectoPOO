@@ -17,7 +17,6 @@ public class Detalle_Pedido {
     public Detalle_Pedido(){
     }
 
-
     public Detalle_Pedido(Producto producto, Combo combo, int cantidad){
 
         this.producto = producto;
