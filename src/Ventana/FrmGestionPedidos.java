@@ -7,7 +7,7 @@ import Paquete_POO.*;
 import javax.swing.JOptionPane;
 /**
  *
- * @author crisv
+ * @author Axel-William
  */
 public class FrmGestionPedidos extends javax.swing.JFrame {
 private GestionPedidos gestionPedidos;
