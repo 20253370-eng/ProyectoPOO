@@ -35,7 +35,6 @@ public FrmGestionPedidos() {
     gestionEmpleados = Sistema.gestionEmpleados;
 
 
-
     modeloProductos = new javax.swing.table.DefaultTableModel();
 
     modeloProductos.addColumn("Código");
