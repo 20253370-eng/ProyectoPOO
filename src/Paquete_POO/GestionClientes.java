@@ -20,8 +20,6 @@ public class GestionClientes {
         cantClientes = 0;
     }
 
-
-
     public void registrarCliente(Cliente cli){
 
         if(cantClientes < listaClientes.length){
